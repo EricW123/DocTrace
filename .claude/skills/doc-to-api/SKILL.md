@@ -1,43 +1,70 @@
 ---
 name: doc-to-api
-description: Convert documentation into Python API stubs (.pyi) with function signatures and docstrings only.
+description: Convert documentation into strongly-typed Python API contracts with precise type definitions and fully embedded documentation.
 ---
 
 # /doc-to-api
 
 ## Goal
-Convert a documentation description into a Python stub (.pyi) file containing function signatures and docstrings only.
+Generate a Python API contract with strong typing and complete in-code documentation. All explanations must be embedded inside the code as docstrings or comments.
 
 ---
 
 ## Instructions
 
-1. Parse the documentation:
-   - Identify API endpoints
-   - Extract inputs (parameters, types if possible)
-   - Extract outputs
+### Step 1: Parse Documentation
 
-2. Generate Python function signatures:
-   - Use type hints
-   - Use `->` return types
-   - No implementation body
+Extract:
+- endpoint purpose
+- inputs (fields, types, constraints)
+- outputs (structure, fields)
 
-3. Add docstrings:
-   - Describe purpose
-   - Document parameters
-   - Document return value
+---
+
+### Step 2: Define Structured Types
+
+Use appropriate constructs such as:
+- TypedDict
+- dataclasses
+- Protocol
+- generics (when useful)
+
+Avoid untyped containers like `dict`.
+
+---
+
+### Step 3: Define API Contract
+
+Define a callable interface using function signature or Protocol.
+
+---
+
+### Step 4: Documentation Placement (MANDATORY)
+
+All explanations MUST be placed inside the code:
+
+- Use docstrings (`""" ... """`) for:
+  - types
+  - functions
+  - API contracts
+
+- Use inline comments (`# ...`) only when necessary
+
+- DO NOT write any explanation outside the code block
 
 ---
 
 ## Constraints
 
 - DO NOT implement any logic
-- DO NOT include executable code
-- ONLY function signatures + docstrings
-- Use `pass` or `...` as body
+- DO NOT output any text outside the code block
+- EVERY type and interface MUST include a docstring
+- Types must be explicit and structured (no raw dict unless unavoidable)
+- Prefer reusable and composable types
 
 ---
 
 ## Output
 
-Return a valid `.pyi`-style Python code block only.
+Return a single valid Python code block only.
+No explanation outside the code.
