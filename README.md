@@ -1,5 +1,7 @@
 # DocuDiif: Semantic Commit Analysis System
 
+![thumbnail](logo.png)
+
 ## Final (3rd) Project Report
 
 ---
