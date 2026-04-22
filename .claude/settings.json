@@ -1,0 +1,37 @@
+{
+    "hooks": {
+        "PreToolUse": [
+            {
+                "matcher": "analyze-diff|impact-analysis",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "node scripts/validate-json.js"
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "npm run lint"
+                    },
+                    {
+                        "type": "command",
+                        "command": "npx tsc --noEmit"
+                    },
+                    {
+                        "type": "command",
+                        "command": "npm run test"
+                    },
+                    {
+                        "type": "command",
+                        "command": "npm audit --audit-level=high"
+                    }
+                ]
+            }
+        ]
+    }
+}

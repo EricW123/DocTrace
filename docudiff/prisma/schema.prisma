@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Comparison {
+  id           String   @id @default(cuid())
+  repo         String
+  baseCommit   String
+  targetCommit String
+
+  summary      String
+  breaking     Boolean
+  riskScore    Float
+  impactLevel  String
+
+  createdAt    DateTime @default(now())
+  expiresAt    DateTime
+
+  changes      Change[]
+}
+
+model Change {
+  id            String   @id @default(cuid())
+  comparisonId  String
+  path          String
+  description   String
+
+  comparison    Comparison @relation(fields: [comparisonId], references: [id])
+}

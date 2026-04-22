@@ -1,0 +1,22 @@
+name: AI PR Review
+
+on:
+  pull_request:
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Claude Review
+        run: |
+          npx @anthropic-ai/claude-code \
+            -p "Review this PR. Focus on:
+            - correctness
+            - security
+            - API contract consistency
+            - LLM usage issues"
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
