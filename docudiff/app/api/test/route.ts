@@ -50,5 +50,5 @@ async function test_gmn() {
 export async function GET() {
     // return test_db();
     // return test_gh();
-    return withRetry(test_gmn);
+    // return withRetry(test_gmn);
 }
