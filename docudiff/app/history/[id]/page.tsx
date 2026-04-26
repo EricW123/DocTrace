@@ -44,7 +44,7 @@ export default async function DetailPage({ params }: { params: Promise<{ id: str
                 <h2 className="font-semibold mb-2">Changes</h2>
 
                 <ul className="space-y-2">
-                    {record.changes.map((c) => (
+                    {record.changes.map((c: any) => (
                         <li key={c.id} className="border p-2 rounded">
                             <div className="font-mono text-sm">{c.path}</div>
                             <div>{c.description}</div>
